@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>Simulacija</head>
+    <body>
+        <script>
+         var attacker;
+         var target;
+         var health = 100;
+         var rechargeTime = 1000*health/100;
+         var damage = health/100;
+         var cricitalChance = 10 - health/10;
+
+         var unit = {
+              unit1: {name:"bob", health, rechargeTime, damage, cricitalChance},
+              unit2: {name:"mike", health, rechargeTime, damage, cricitalChance},
+              unit3: {name:"nazi", health, rechargeTime, damage, cricitalChance}
+         }
+         var allUnit = [];
+         for(var key in unit) {
+             allUnit.push(unit[key]);
+             
+         }
+         console.log(allUnit);
+         console.log(allUnit[0]);
+
+        
+         function mainLoop(){
+             var i;
+             var j;
+             var newHealth ;
+              //for(j=0; health > 1; j++) {
+                 
+                for(i=0; i <= 2; i++) {
+                    if(allUnit[i].health > 0) {
+                        console.log(allUnit[i].name + " health =  " + allUnit[i].health);
+                        console.log(allUnit[i].name);
+                        if(allUnit[i].rechargeTime == 1000 ) {
+                            attacker=i;
+                            
+                            choseTarget(attacker); 
+                            allUnit[i].rechargeTime = 0;
+                            
+                            console.log(allUnit[i].name + " rechargeTime =  " + allUnit[i].rechargeTime)
+                            
+                        } else {
+                            allUnit[i].rechargeTime ++;
+                            console.log(allUnit[i].name + " rechargeTime =  " + allUnit[i].rechargeTime);
+                            
+                         }
+                    } 
+                    newHealth = allUnit[i].health;   
+                    console.log(allUnit[i].name + ' ovo je novi health  ' + newHealth); 
+                }
+              
+         } 
+         mainLoop();
+         function choseTarget(attacker) {
+            target = Math.floor(Math.random() * 3);
+            console.log("ovo je meta " + target);
+            allUnit[target].health = allUnit[target].health - allUnit[attacker].damage;
+            console.log(allUnit[target].name + " health " + allUnit[target].health);
+         }
+         function endGame(newHealth) {
+            
+         }
+        
+        </script>
+    </body>
+</html>
